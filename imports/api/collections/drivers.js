@@ -1,6 +1,5 @@
 import { Meteor } from "meteor/meteor";
 import SimpleSchema from 'simpl-schema';
-import { ImageSchema } from "./helperSchemas.js";
 
 const Drivers = new Meteor.Collection("drivers");
 
@@ -8,6 +7,9 @@ Drivers.Schema = new SimpleSchema({
   _id: {
     type: String,
     optional: true
+  },
+  userId: {
+    type: String
   },
   firstName: {
     label: "First name",
@@ -31,7 +33,8 @@ Drivers.Schema = new SimpleSchema({
   },
   carType: {
     label: "Car type", // available: private, taxi, bus
-    type: String
+    type: String,
+    allowedValues: ['taxi', 'minibus', 'bus']
   },
   seats: {
     label: "Number of seats",

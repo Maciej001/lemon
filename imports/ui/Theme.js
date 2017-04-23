@@ -17,11 +17,14 @@ const weights = {
 const colors = {
   dark: "#021C0C",
   primary: '#0ECF5C',
-  primaryLight: '#36CF74',
+  primaryLight: '#79FF9E ',
+  primaryDark: '#0BA84B',
   primaryLightlyTransparent:  'rgba(14,207,92, 0.7)',
+  primaryGrey: '#69947B',
   grey: '#1F2622',
-  lightGrey: '#A2C7B2',
-  transparent: 'rgba(255,255,255, 0.8)'
+  lightGrey: '#B6C7E1',
+  transparent: 'rgba(255,255,255, 0.8)',
+  danger: '#FF6C66'
 };
 
 const margins = {

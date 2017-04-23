@@ -123,22 +123,18 @@ export const ButtonsRow = styled.div`
 
 export const Button = styled.button`
   display: inline-block;
-  padding: 10px 20px;
-  background: ${props =>
-  props.color ? props.theme.colors[props.color] : props.theme.colors.primary};
-  color: ${props => props.theme.colors.negative};
+  padding: 10px 15px;
+  background: ${props => props.color ? props.theme.colors[props.color] : props.theme.colors.primary };
+  color: ${props => props.theme.colors.transparent};
   font-size: ${props => props.theme.fontSizes.nm};
   font-weight: bold;
-  margin-right: ${props => props.theme.margins.lg}
-  border-radius: 30px;
-  box-shadow: 2px 2px 7px rgba(0,0,0,0.3);
+  border-radius: ${props => props.theme.radius.md}
   outline: none;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-out;
   &:hover {
-    background: ${props => props.theme.colors.done};
-    box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+    background: ${props => props.theme.colors.primaryLight};
   }
 `;
 

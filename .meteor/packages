@@ -19,3 +19,5 @@ mdg:validated-method
 static-html
 shell-server
 aldeed:collection2-core
+accounts-password
+accounts-facebook

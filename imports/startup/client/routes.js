@@ -6,6 +6,7 @@ import { Home } from "/imports/api/home/Home";
 import Header from "/imports/api/headers/Header";
 import Footer from "/imports/api/headers/Footer";
 import DriverRegistration from "/imports/api/drivers/DriverRegistration";
+import Driver from '/imports/api/drivers/Driver';
 
 export class Routes extends React.Component {
   render() {
@@ -25,21 +26,13 @@ export class Routes extends React.Component {
           <IndexRoute
             components={{
               header: Header,
-              content: Home,
               footer: Footer
             }}
           />
+          <Route path="/drivers/register" components={{content: DriverRegistration}} />
+          <Route path="/drivers/:driverId" components={{content: Driver}}/>
         </Route>
 
-        <Route path="/drivers/register" component={App}>
-          <IndexRoute
-            components={{
-              header: Header,
-              content: DriverRegistration,
-              footer: Footer
-            }}
-          />
-        </Route>
       </Router>
     );
   }

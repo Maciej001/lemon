@@ -1,6 +1,6 @@
 import React from "react";
 import { FluidContainer, Container, Row, Cell } from "/imports/ui/Grid";
-import { MdTitle, SmTitle } from "/imports/ui/Components";
+import { MdTitle } from "/imports/ui/Components";
 import styled from 'styled-components';
 
 const FooterWrapper = styled.div`
@@ -12,12 +12,12 @@ const FooterWrapper = styled.div`
 const Footer = props => (
   <FooterWrapper>
     <Container>
-      <MdTitle color='transparent' bold>Drivers</MdTitle>
-      <SmTitle color='transparent'>
+      <MdTitle color='transparent' bold>DRIVERS</MdTitle>
+      <MdTitle color='transparent'>
         <a href="/drivers/register">
           Register
         </a>
-      </SmTitle>
+      </MdTitle>
     </Container>
   </FooterWrapper>
 );

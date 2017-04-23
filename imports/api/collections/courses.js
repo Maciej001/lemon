@@ -1,6 +1,5 @@
 import { Meteor } from "meteor/meteor";
 import SimpleSchema from 'simpl-schema';
-import { ImageSchema } from "./helperSchemas.js";
 
 const Drivers = new Meteor.Collection("drivers");
 
