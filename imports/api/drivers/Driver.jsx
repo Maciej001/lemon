@@ -4,6 +4,8 @@ import { WithPadding, Image, LgTitle, MdSubtitle, MdText } from '/imports/ui/Com
 import { FluidContainer, Container, Row, Cell } from '/imports/ui/Grid';
 import styled from 'styled-components';
 
+import AddCourse from './AddCourse'
+
 const Car = styled.div`
   position: relative;
   box-sizing: border-box;
@@ -29,6 +31,11 @@ const Padding = styled.div`
 `
 
 class DriverComponent extends Component {
+
+  ownsProfile = () => {
+    return Meteor.userId() === this.props.params.driverId;
+  }
+
   render() {
     const { driver } = this.props;
     return (
@@ -55,8 +62,13 @@ class DriverComponent extends Component {
 
                 <MdSubtitle color='grey' margin='0' bold inline>SEATS</MdSubtitle>
                 <MdText color='lightGrey'>{driver.seats}</MdText>
-
               </Cell>
+
+              { this.ownsProfile() &&
+                <Cell xs={12}>
+                  <AddCourse />
+                </Cell>}
+
             </Row>
           </Padding>
         </Container>
