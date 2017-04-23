@@ -8,20 +8,11 @@ export const FluidContainer = styled.div`
 `
 
 export const Container = styled.div`
+  box-sizing: border-box;
   margin: 0 auto;
   padding: 0 ${props => props.theme.halfGutterWidth}rem;
-  box-sizing: border-box;
+  width: 100%;
   max-width: ${props => props.theme.maxWidth};
-  min-width: ${props => props.theme.screenXsMin};
-  @media only screen and (min-width: ${props => props.theme.screenSmMin}) {
-    width: ${props => props.theme.screenSmMin};
-  }
-  @media only screen and (min-width: ${props => props.theme.screenMdMin}) {
-    width: ${props => props.theme.screenMdMin};
-  }
-  @media only screen and (min-width: ${props => props.theme.screenLgMin}) {
-    width: ${props => props.theme.screenLgMin};
-  }
 `
 
 export const ContainerSmall = styled(Container)`
@@ -33,10 +24,8 @@ export const ContainerWide = styled(Container)`
 `
 
 export const Row = styled.div`
-  width: 100
-  box-sizing: border-box;
   display: flex;
-  flex: 1 1 100%;
+  flex: 1 0 100%;
   flex-wrap: wrap;
   margin: 0 ${props => props.theme.gutterCompensation}rem;
   flex-direction: ${props => {

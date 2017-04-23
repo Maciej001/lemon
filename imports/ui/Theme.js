@@ -24,7 +24,8 @@ const colors = {
   grey: '#1F2622',
   lightGrey: '#B6C7E1',
   transparent: 'rgba(255,255,255, 0.8)',
-  danger: '#FF6C66'
+  danger: '#FF6C66',
+  white: 'ffffff'
 };
 
 const margins = {

@@ -14,6 +14,17 @@ export const createDriver = new ValidatedMethod({
   }
 });
 
+export const addDriver = new ValidatedMethod({
+  name: "addDriver",
+  validate: null,
+  run({ role }) {
+    if (Meteor.isServer) {
+      Roles.addUsersToRoles(this.userId, ['drivers'], 'default-group' )
+    }
+  }
+});
+
+
 export const updateDriver = new ValidatedMethod({
   name: "updateDriver",
   validate: null,

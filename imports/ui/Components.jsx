@@ -103,6 +103,10 @@ export const ImageRoundSmall = styled(ImageRound)`
   margin-right: ${props => props.theme.margins.md};
 `;
 
+export const ProfileImageMd = styled(Image)`
+  max-width: 100px;
+`
+
 export const FullWidthWrapper = styled.div`
   background: ${props =>
   props.color ? props.theme.colors[props.color] : "transparent"};

@@ -8,7 +8,7 @@ import { validPassword, validEmail, Errors } from "../helpers.js";
 import { Link } from "react-router";
 import { browserHistory } from "react-router";
 import Drivers from "../collections/drivers";
-import { createDriver } from './methods'
+import { addDriver } from "./methods.js";
 
 const FooterWrapper = styled.div`
   margin-top: 40px;
@@ -44,7 +44,7 @@ const Fields = styled.div`
 
 const ButtonRow = styled.div`
   margin-top: ${props => props.theme.margins.lg};
-`
+`;
 
 class DriverRegistration extends Component {
   state = {
@@ -55,6 +55,7 @@ class DriverRegistration extends Component {
       firstName: "",
       lastName: "",
       imgUrl: "",
+      carImgUrl: "",
       car: "",
       carType: "",
       registration: "",
@@ -62,6 +63,7 @@ class DriverRegistration extends Component {
     },
     errors: []
   };
+
 
   formValid = () => {
     const isEmailValid = validEmail(this.state.fields.email);
@@ -73,13 +75,17 @@ class DriverRegistration extends Component {
     let errors = [];
     if (!isPasswordValid) errors = ["Wrong password"];
     if (!isEmailValid) errors = [...errors, "Wrong email"];
-    if (this.state.fields.firstName === '') errors = [...errors, 'Missing firstName'];
-    if (this.state.fields.lastName === '') errors = [...errors, 'Missing lastName'];
-    if (this.state.fields.imgUrl === '') errors = [...errors, 'Missing imgUrl'];
-    if (this.state.fields.car === '') errors = [...errors, 'Missing car'];
-    if (this.state.fields.carType === '') errors = [...errors, 'Missing carType'];
-    if (this.state.fields.registration === '') errors = [...errors, 'Missing registration'];
-    if (this.state.fields.seats === '') errors = [...errors, 'Missing seats'];
+    if (this.state.fields.firstName === "")
+      errors = [...errors, "Missing firstName"];
+    if (this.state.fields.lastName === "")
+      errors = [...errors, "Missing lastName"];
+    if (this.state.fields.imgUrl === "") errors = [...errors, "Missing imgUrl"];
+    if (this.state.fields.car === "") errors = [...errors, "Missing car"];
+    if (this.state.fields.carType === "")
+      errors = [...errors, "Missing carType"];
+    if (this.state.fields.registration === "")
+      errors = [...errors, "Missing registration"];
+    if (this.state.fields.seats === "") errors = [...errors, "Missing seats"];
     this.setState({ errors });
 
     return !errors.length;
@@ -94,38 +100,46 @@ class DriverRegistration extends Component {
   onChangeCapitalise = e => {
     const value = e.target.value;
     const dataName = e.target.dataset.name;
-    this.setState({ fields: { ...this.state.fields, [dataName]: value.toUpperCase() } });
+    this.setState({
+      fields: { ...this.state.fields, [dataName]: value.toUpperCase() }
+    });
   };
 
   onChangeNumber = e => {
     const value = e.target.value;
     const dataName = e.target.dataset.name;
-    this.setState({ fields: { ...this.state.fields, [dataName]: Number(value) } });
+    this.setState({
+      fields: { ...this.state.fields, [dataName]: Number(value) }
+    });
   };
-
-  createDriver = (userId) => {
-    const driver = _.omit(this.state.fields, ['email', 'password', 'passwordConfirmation']);
-    createDriver.call({driver}, (error, result) =>{
-      if (error) {
-        console.log(`Error`, error);
-      } else {
-        browserHistory.push(`/driver/${Meteor.userId()}`);
-      }
-    })
-  }
 
   onSubmit = e => {
     e.preventDefault();
     this.setState({ submittingState: "submitting" });
 
     if (this.formValid()) {
+      const profile = _.omit(this.state.fields, [
+        "email",
+        "password",
+        "passwordConfirmation"
+      ]);
       Accounts.createUser(
-        { email: this.state.fields.email, password: this.state.fields.password },
+        {
+          email: this.state.fields.email,
+          password: this.state.fields.password,
+          profile
+        },
         (error, res) => {
           if (error) {
             this.setState({ errors: [...this.state.errors, error.reason] });
-          } else if (!!Meteor.userId()) {
-            this.createDriver(Meteor.userId());
+          } else {
+            addDriver.call({role: 'drivers'}, (error, result) => {
+              if (error) {
+                console.log("Error", error.reason)
+              } else {
+                console.log(`user is in role`, Roles.userIsInRole(this.userId, ['drivers'] ))
+              }
+            })
             browserHistory.push(`/drivers/${Meteor.userId()}`);
           }
         }
@@ -141,7 +155,9 @@ class DriverRegistration extends Component {
         <Row>
           <Cell xs={12} sm={10} smOffset={1} md={6} mdOffset={3}>
             <SignWrapper>
-              <LgTitle bold color='lightGrey'>Register as a Lemon driver</LgTitle>
+              <LgTitle bold color="lightGrey">
+                Register as a Lemon driver
+              </LgTitle>
               <Errors errors={this.state.errors} />
               <Fields>
                 <Input
@@ -149,70 +165,77 @@ class DriverRegistration extends Component {
                   label="Email"
                   value={this.state.fields.email}
                   onChange={this.onChange}
-                  type='email'
+                  type="email"
                 />
                 <Input
                   name="password"
                   label="Password"
                   value={this.state.fields.password}
                   onChange={this.onChange}
-                  type='password'
+                  type="password"
                 />
                 <Input
                   name="passwordConfirmation"
                   label="Password Confirmation"
                   value={this.state.fields.passwordConfirmation}
                   onChange={this.onChange}
-                  type='password'
+                  type="password"
                 />
                 <Input
                   name="firstName"
                   label={schema.firstName.label}
                   value={this.state.fields.firstName}
                   onChange={this.onChange}
-                  type='text'
+                  type="text"
                 />
                 <Input
                   name="lastName"
                   label={schema.lastName.label}
                   value={this.state.fields.lastName}
                   onChange={this.onChange}
-                  type='url'
+                  type="url"
                 />
                 <Input
                   name="imgUrl"
                   label={schema.imgUrl.label}
                   value={this.state.fields.imgUrl}
                   onChange={this.onChange}
-                  type='text'
+                  type="text"
+                />
+                <Input
+                  name="imgUrl"
+                  label={schema.carImgUrl.label}
+                  value={this.state.fields.carImgUrl}
+                  onChange={this.onChange}
+                  type="text"
                 />
                 <Input
                   name="car"
                   label={schema.car.label}
                   value={this.state.fields.car}
                   onChange={this.onChange}
-                  type='text'
+                  type="text"
                 />
                 <Input
                   name="carType"
                   label={schema.carType.label}
                   value={this.state.fields.carType}
                   onChange={this.onChange}
-                  type='text'
+                  type="text"
                 />
                 <Input
                   name="registration"
                   label={schema.registration.label}
                   value={this.state.fields.registration}
                   onChange={this.onChangeCapitalise}
-                  type='text'
+                  type="text"
                 />
                 <Input
                   name="seats"
                   label={schema.seats.label}
                   value={this.state.fields.seats}
                   onChange={this.onChangeNumber}
-                  type='text'
+                  type="text"
                 />
               </Fields>
               <ButtonRow>

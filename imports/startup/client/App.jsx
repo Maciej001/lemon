@@ -7,7 +7,6 @@ import "./App.css";
 export class App extends Component {
   render() {
     const { header, content, footer } = this.props;
-    console.log(`content`, content);
     return (
       <ThemeProvider theme={Theme}>
         <div className="App">

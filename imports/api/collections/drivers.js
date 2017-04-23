@@ -23,6 +23,10 @@ Drivers.Schema = new SimpleSchema({
     label: "Profile image URL",
     type: String
   },
+  carImgUrl: {
+    label: "Car image URL",
+    type: String
+  },
   car: {
     label: "Car description",
     type: String
