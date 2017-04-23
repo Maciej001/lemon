@@ -7,6 +7,7 @@ import Header from "/imports/api/headers/Header";
 import Footer from "/imports/api/headers/Footer";
 import DriverRegistration from "/imports/api/drivers/DriverRegistration";
 import Driver from "/imports/api/drivers/Driver";
+import NewCourse from "/imports/api/drivers/NewCourse";
 
 export class Routes extends React.Component {
   render() {
@@ -41,6 +42,14 @@ export class Routes extends React.Component {
             components={{
               header: Header,
               content: Driver,
+              footer: Footer
+            }}
+          />
+          <Route
+            path="/drivers/newcourse/:driverId"
+            components={{
+              header: Header,
+              content: NewCourse,
               footer: Footer
             }}
           />

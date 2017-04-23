@@ -29,8 +29,8 @@ class AddCourse extends Component {
         <Row>
           <Cell xs={12}>
             <MdTitle color='grey' bold>Add course</MdTitle>
-            <AddCourseButton direction='from' href={`/drivers/:driverId/newcourse`}>From airport</AddCourseButton>
-            <AddCourseButton direction='to' href={`/drivers/:driverId/newcourse`}>To airport</AddCourseButton>
+            <AddCourseButton href={`/drivers/newcourse/${Meteor.userId()}?destination=city`}>From airport</AddCourseButton>
+            <AddCourseButton href={`/drivers/newcourse/${Meteor.userId()}?destination=airport`}>From city</AddCourseButton>
           </Cell>
         </Row>
       </WithPadding>

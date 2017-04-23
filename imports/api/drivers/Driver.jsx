@@ -66,7 +66,7 @@ class DriverComponent extends Component {
 
               { this.ownsProfile() &&
                 <Cell xs={12}>
-                  <AddCourse />
+                  <AddCourse/>
                 </Cell>}
 
             </Row>
